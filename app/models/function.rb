@@ -73,15 +73,14 @@ class Function < ApplicationRecord
     end
   end
 
-  def invoke!(invocation_type: "RequestResponse")
+  def invoke!(invocation_type: "RequestResponse", client_context: {}, payload: {})
     log_type = invocation_type == "RequestResponse" ? "Tail" : "None"
     AWS_LAMBDA_CLIENT.invoke({
       function_name: remote_id,
       invocation_type: invocation_type, # accepts Event, RequestResponse, DryRun
       log_type: log_type, # accepts None, Tail
-      # client_context: "String",
-      # payload: "data",
-      # qualifier: "Qualifier",
+      # client_context: Base64.encode64(client_context.to_json),
+      payload: payload.to_json,
     })
   end
 
