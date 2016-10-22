@@ -12,12 +12,21 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rollbar'
 gem 'paper_trail'
+gem 'aws-sdk', '2.6.12'
 
 group :development do
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'webmock'
+  gem 'rspec_junit_formatter'
 end
 
 group :production do
