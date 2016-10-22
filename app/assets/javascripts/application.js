@@ -4,9 +4,11 @@
 //= require angular
 //= require angular-animate
 //= require angular-resource
-//= require ace-rails-ap
-//= require ace/mode-java
-//= require ace/mode-javascript
-//= require ace/mode-python
-//= require ace/theme-github
+//= require ace-builds/src-noconflict/ace
+//= require ace-builds/src-noconflict/theme-github
+//= require ace-builds/src-noconflict/mode-java
+//= require ace-builds/src-noconflict/mode-javascript
+//= require ace-builds/src-noconflict/mode-python
+//= require angular-ui-ace/ui-ace
 //= require stretch-to-bottom
+//= require angular-app/index

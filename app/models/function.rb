@@ -108,6 +108,7 @@ class Function < ApplicationRecord
   def as_json(options = {})
     super(options).merge({
       runtime_name: runtime_name,
+      runtime_language: runtime_language,
     })
   end
 

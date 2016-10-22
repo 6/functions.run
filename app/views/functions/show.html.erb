@@ -1,4 +1,4 @@
-<div class="bb b--black-10">
+<div class="bb b--black-10" ng-controller="functions-app.function-editor-controller">
   <section class="dt w-100 ph4 center">
     <div class="dtc v-mid">
       <h1 class="f4 mb1">
@@ -22,9 +22,7 @@
 </div>
 
 <main class="w-100 center cf js-stretch-to-bottom">
-  <div class="fl w-60 relative h-100">
-    <pre id="code-editor" class="mv0"><%= @function.code %></pre>
-  </div>
+  <div class="fl w-60 relative h-100" ui-ace></div>
   <div class="fr w-40 bl b--black-10 h-100 pa4">
     <p class="f4 b mv0">Run the function</p>
     <p class="black-50 lh-copy f6">Supply input to the function (if applicable) and press the "Run" button to try it out.</p>
@@ -34,13 +32,5 @@
 </main>
 
 <script>
-  var editor = ace.edit("code-editor");
-  editor.setTheme("ace/theme/github");
-  editor.setOptions({
-    fontFamily: "Consolas, Menlo, Courier, monospace",
-    fontSize: "13px"
-  });
-  editor.setShowPrintMargin(false);
-  editor.session.setMode("ace/mode/<%= @function.runtime_language %>");
-  editor.getSession().setUseWrapMode(true);
+  window.data = {function: <%= @function.as_json.to_json.html_safe %>};
 </script>
