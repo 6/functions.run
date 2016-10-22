@@ -15,6 +15,7 @@ gem 'paper_trail'
 gem 'aws-sdk', '2.6.12'
 gem 'rack-canonical-host'
 gem 'rubyzip'
+gem 'angularjs-rails'
 
 group :development do
   gem 'web-console'
