@@ -3,6 +3,8 @@
 @import "tachyons-typography";
 @import "tachyons-cursors";
 @import "icono";
+@import "codemirror/lib/codemirror";
+@import "codemirror/theme/eclipse";
 
 // Site-specific styles
 @import "base";

@@ -31,7 +31,7 @@ class Function < ApplicationRecord
     # 1536,
   ]
 
-  validates :name, presence: true, format: {with: /\A[-_.a-zA-Z0-9]+\z/}, length: {maximum: 100}
+  validates :name, presence: true, format: {with: /\A[_a-zA-Z0-9]+\z/}, length: {maximum: 100}
   validates :description, length: {maximum: 500}
   validates :remote_id, presence: true, uniqueness: true
   validates :runtime, inclusion: {in: RUNTIMES}
@@ -109,6 +109,9 @@ class Function < ApplicationRecord
     super(options).merge({
       runtime_name: runtime_name,
       runtime_language: runtime_language,
+      code_with_template: code_with_template(use_public_template: true),
+      disable_first_line_editing: disable_first_line_editing?,
+      disable_final_line_editing: disable_final_line_editing?,
     })
   end
 
@@ -134,11 +137,22 @@ private
     end
   end
 
-  def code_with_template
-    file_contents = File.read(Rails.root.join("app/views/lambda_templates/template.erb.#{file_extension}"))
+  def disable_first_line_editing?
+    true
+  end
+
+  def disable_final_line_editing?
+    runtime_language == "javascript" || runtime_language == "java"
+  end
+
+  def code_with_template(use_public_template: false)
+    filename = "template.erb.#{file_extension}"
+    filename = "public_#{filename}" if use_public_template
+    file_contents = File.read(Rails.root.join("app/views/lambda_templates/#{filename}"))
     erb_binding = binding
     erb_binding.local_variable_set(:code, code)
-    ERB.new(file_contents).result(erb_binding)
+    erb_binding.local_variable_set(:name, name)
+    ERB.new(file_contents).result(erb_binding).strip
   end
 
   def set_defaults
