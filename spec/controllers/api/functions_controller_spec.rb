@@ -62,9 +62,8 @@ describe Api::FunctionsController do
         expect(function).to be_private
       end
 
-      it "does not call update_code! or update_remote_configuration!" do
-        expect_any_instance_of(Function).not_to receive(:update_code!)
-        expect_any_instance_of(Function).not_to receive(:update_remote_configuration!)
+      it "does not call update_remote_function!" do
+        expect_any_instance_of(Function).not_to receive(:update_remote_function!)
         put :update, params: params
       end
     end
@@ -78,8 +77,8 @@ describe Api::FunctionsController do
         }
       end
 
-      it "calls update_code!" do
-        expect_any_instance_of(Function).to receive(:update_code!).with(code)
+      it "calls update_remote_function!" do
+        expect_any_instance_of(Function).to receive(:update_remote_function!).with(hash_including(code: code))
         put :update, params: params
       end
     end
@@ -94,9 +93,9 @@ describe Api::FunctionsController do
         }
       end
 
-      it "calls update_remote_configuration!" do
-        expect_any_instance_of(Function).to receive(:update_remote_configuration!)
-          .with(runtime: "python2.7", timeout: "2", memory_size: "128")
+      it "calls update_remote_function!" do
+        expect_any_instance_of(Function).to receive(:update_remote_function!)
+          .with(hash_including(runtime: "python2.7", timeout: "2", memory_size: "128"))
         put :update, params: params
       end
     end

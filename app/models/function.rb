@@ -47,29 +47,25 @@ class Function < ApplicationRecord
     })
   end
 
-  def update_code!(code)
+  def update_remote_function!(attributes)
     ActiveRecord::Base.transaction do
-      update!({code: code})
-      AWS_LAMBDA_CLIENT.update_function_code({
-        function_name: remote_id,
-        zip_file: code_as_zip_file,
-      })
-    end
-  end
+      update!(attributes)
 
-  def update_remote_configuration!(timeout: self.timeout, memory_size: self.memory_size, runtime: self.runtime)
-    ActiveRecord::Base.transaction do
-      update!({
-        timeout: timeout,
-        memory_size: memory_size,
-        runtime: runtime,
-      })
-      AWS_LAMBDA_CLIENT.update_function_configuration({
-        function_name: remote_id,
-        timeout: timeout,
-        memory_size: memory_size,
-        runtime: runtime,
-      })
+      if attributes[:code].present?
+        AWS_LAMBDA_CLIENT.update_function_code({
+          function_name: remote_id,
+          zip_file: code_as_zip_file,
+        })
+      end
+
+      if [:timeout, :memory_size, :runtime].any? { |attribute| attributes[attribute].present?}
+        AWS_LAMBDA_CLIENT.update_function_configuration({
+          function_name: remote_id,
+          timeout: timeout,
+          memory_size: memory_size,
+          runtime: runtime,
+        })
+      end
     end
   end
 

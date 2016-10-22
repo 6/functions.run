@@ -16,14 +16,7 @@ class Api::FunctionsController < Api::BaseController
     @function = Function.find(params[:id])
     ActiveRecord::Base.transaction do
       @function.update!(update_local_function_params) if update_local_function_params.present?
-      @function.update_code!(params[:code]) if params[:code].present?
-      if update_remote_configuration_params.present?
-        @function.update_remote_configuration!(
-          timeout: update_remote_configuration_params[:timeout],
-          memory_size: update_remote_configuration_params[:memory_size],
-          runtime: update_remote_configuration_params[:runtime],
-        )
-      end
+      @function.update_remote_function!(update_remote_function_params) if update_remote_function_params.present?
     end
     render json: @function
   end
@@ -47,7 +40,7 @@ private
     params.permit(:name, :description, :private)
   end
 
-  def update_remote_configuration_params
-    params.permit(:runtime, :memory_size, :timeout)
+  def update_remote_function_params
+    params.permit(:code, :runtime, :memory_size, :timeout)
   end
 end
