@@ -88,14 +88,14 @@ private
 
   def code_as_zip_file
     stringio = Zip::OutputStream.write_buffer do |out|
-      out.put_next_entry("#{MODULE_NAME}.#{zip_file_extension}")
-      out.write(code)
+      out.put_next_entry("#{MODULE_NAME}.#{file_extension}")
+      out.write(code_with_template)
     end
     stringio.rewind
     stringio
   end
 
-  def zip_file_extension
+  def file_extension
     case runtime
     when "python2.7"
       "py"
@@ -104,6 +104,13 @@ private
     else
       "js"
     end
+  end
+
+  def code_with_template
+    file_contents = File.read(Rails.root.join("app/views/lambda_templates/template.erb.#{file_extension}"))
+    erb_binding = binding
+    erb_binding.local_variable_set(:code, code)
+    ERB.new(file_contents).result(erb_binding)
   end
 
   def set_defaults
