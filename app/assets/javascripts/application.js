@@ -1,3 +1,4 @@
+//= require underscore
 //= require jquery
 //= require jquery_ujs
 //= require angular
@@ -8,3 +9,4 @@
 //= require ace/mode-javascript
 //= require ace/mode-python
 //= require ace/theme-github
+//= require stretch-to-bottom
