@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rollbar'
 gem 'paper_trail'
 gem 'aws-sdk', '2.6.12'
+gem 'rack-canonical-host'
 
 group :development do
   gem 'web-console'
