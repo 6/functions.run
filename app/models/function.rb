@@ -11,6 +11,11 @@ class Function < ApplicationRecord
     "nodejs4.3",
     "python2.7",
   ]
+  RUNTIME_NAMES = {
+    "java8" => "Java 8",
+    "nodejs4.3" => "Node.js 4.3",
+    "python2.7" => "Python 2.7",
+  }
 
   MEMORY_SIZES = [
     128,
@@ -84,6 +89,16 @@ class Function < ApplicationRecord
       log_type: log_type, # accepts None, Tail
       client_context: Base64.encode64(client_context.to_json),
       payload: payload,
+    })
+  end
+
+  def runtime_name
+    RUNTIME_NAMES[runtime]
+  end
+
+  def as_json(options = {})
+    super(options).merge({
+      runtime_name: runtime_name,
     })
   end
 

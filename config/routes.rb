@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :functions, only: [:index, :show]
+
   root to: "landing_pages#show"
 end
