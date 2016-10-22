@@ -3,3 +3,8 @@
 //= require angular
 //= require angular-animate
 //= require angular-resource
+//= require ace-rails-ap
+//= require ace/mode-java
+//= require ace/mode-javascript
+//= require ace/mode-python
+//= require ace/theme-github

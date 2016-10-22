@@ -6,5 +6,6 @@ class FunctionsController < ApplicationController
   end
 
   def show
+    @function = Function.find(params[:id])
   end
 end

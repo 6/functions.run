@@ -16,6 +16,11 @@ class Function < ApplicationRecord
     "nodejs4.3" => "Node.js 4.3",
     "python2.7" => "Python 2.7",
   }
+  RUNTIME_LANGUAGES = {
+    "java8" => "java",
+    "nodejs4.3" => "javascript",
+    "python2.7" => "python",
+  }
 
   MEMORY_SIZES = [
     128,
@@ -94,6 +99,10 @@ class Function < ApplicationRecord
 
   def runtime_name
     RUNTIME_NAMES[runtime]
+  end
+
+  def runtime_language
+    RUNTIME_LANGUAGES[runtime]
   end
 
   def as_json(options = {})
