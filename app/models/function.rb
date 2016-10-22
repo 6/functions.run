@@ -7,8 +7,6 @@ class Function < ApplicationRecord
   HANDLER = "#{MODULE_NAME}.handler"
 
   RUNTIMES = %w[
-    java8
-    nodejs
     nodejs4.3
     python2.7
   ]
