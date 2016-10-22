@@ -8,6 +8,7 @@ class CreateFunctions < ActiveRecord::Migration[5.0]
       t.text :code, null: false, limit: 5000 # arbitrary
       t.integer :memory_size, null: false
       t.integer :timeout, null: false
+      t.boolean :private, null: false
       t.timestamps null: false
     end
   end

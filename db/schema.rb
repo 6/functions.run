@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161022013147) do
     t.text     "code",        null: false
     t.integer  "memory_size", null: false
     t.integer  "timeout",     null: false
+    t.boolean  "private",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

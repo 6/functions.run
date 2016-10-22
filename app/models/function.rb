@@ -23,6 +23,7 @@ class Function < ApplicationRecord
   validates :code, presence: true, length: {maximum: 5000}
   validates :memory_size, inclusion: {in: MEMORY_SIZES}
   validates :timeout, inclusion: 1..10
+  validates :private, inclusion: {in: [true, false]}
 
   before_validation :set_defaults, on: :create
 
@@ -36,6 +37,7 @@ private
     self.remote_id = "function-#{SecureRandom.urlsafe_base64(40)}"
     self.memory_size ||= 128
     self.timeout ||= 3
+    self.private ||= false
   end
 
   def aws_client
