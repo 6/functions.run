@@ -1,8 +1,8 @@
 <div class="bb b--black-05">
-  <section class="dt w-100 mw8 center">
+  <section class="dt w-100 ph4 center">
     <div class="dtc v-mid">
-      <h1 class="f3 mb1">
-        <a href="<%= function_path(@function) %>" class="no-underline blue">
+      <h1 class="f4 mb1">
+        <a href="<%= function_path(@function) %>" class="no-underline blue dim">
           <%= @function.name %>
         </a>
       </h1>
@@ -16,12 +16,12 @@
     </div>
     <div class="dtc v-mid">
       <div class="f5 tr mb1 black-60"><%= @function.runtime_name %></div>
-      <div class="f6 tr black-40" title="<%= @function.created_at %>">Created <%= time_ago_in_words(@function.created_at) %></div>
+      <div class="f6 tr black-40" title="<%= @function.created_at %>">Created <%= time_ago_in_words(@function.created_at) %> ago</div>
     </div>
   </section>
 </div>
 
-<main class="w-100 mw8 center cf">
+<main class="w-100 center cf">
   <div class="fl w-70">
     <pre id="code-editor" class="mv0"><%= @function.code %></pre>
   </div>
@@ -33,5 +33,9 @@
 <script>
   var editor = ace.edit("code-editor");
   editor.setTheme("ace/theme/github");
+  editor.setOptions({
+    fontFamily: "Consolas, Menlo, Courier, monospace",
+    fontSize: "13px"
+  });
   editor.session.setMode("ace/mode/<%= @function.runtime_language %>");
 </script>
