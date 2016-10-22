@@ -13,10 +13,11 @@ class Function < ApplicationRecord
 
   MEMORY_SIZES = [
     128,
-    256,
-    512,
-    1024,
-    1536,
+    # TODO: enable the below for paid plans?
+    # 256,
+    # 512,
+    # 1024,
+    # 1536,
   ]
 
   validates :name, presence: true, format: {with: /\A[-_.a-zA-Z0-9]+\z/}, length: {maximum: 100}
@@ -67,6 +68,15 @@ class Function < ApplicationRecord
         timeout: timeout,
         memory_size: memory_size,
         runtime: runtime,
+      })
+    end
+  end
+
+  def destroy_remote_and_self!
+    ActiveRecord::Base.transaction do
+      destroy!
+      AWS_LAMBDA_CLIENT.delete_function({
+        function_name: remote_id,
       })
     end
   end
