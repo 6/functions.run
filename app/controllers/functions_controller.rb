@@ -1,6 +1,8 @@
 class FunctionsController < ApplicationController
+  layout 'default'
+
   def index
-    @functions = Function.order(created_at: :desc)
+    @functions = Function.where(private: false).order(created_at: :desc)
   end
 
   def show
