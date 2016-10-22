@@ -161,6 +161,7 @@ GEM
     rspec_junit_formatter (0.2.3)
       builder (< 4)
       rspec-core (>= 2, < 4, != 2.12.0)
+    rubyzip (1.0.0)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -222,6 +223,7 @@ DEPENDENCIES
   rollbar
   rspec-rails (~> 3.5)
   rspec_junit_formatter
+  rubyzip
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)

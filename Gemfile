@@ -14,6 +14,7 @@ gem 'rollbar'
 gem 'paper_trail'
 gem 'aws-sdk', '2.6.12'
 gem 'rack-canonical-host'
+gem 'rubyzip'
 
 group :development do
   gem 'web-console'
