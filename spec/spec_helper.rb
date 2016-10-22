@@ -38,3 +38,12 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+def response_json
+  json = JSON.parse(response.body)
+  if json.is_a?(Array)
+    json.map(&:with_indifferent_access)
+  else
+    json.with_indifferent_access
+  end
+end

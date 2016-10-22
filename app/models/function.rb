@@ -6,9 +6,10 @@ class Function < ApplicationRecord
   MODULE_NAME = "index"
   HANDLER = "#{MODULE_NAME}.handler"
 
-  RUNTIMES = %w[
-    nodejs4.3
-    python2.7
+  RUNTIMES = [
+    # "java8",
+    "nodejs4.3",
+    "python2.7",
   ]
 
   MEMORY_SIZES = [
@@ -56,7 +57,7 @@ class Function < ApplicationRecord
     end
   end
 
-  def update_configuration!(timeout: self.timeout, memory_size: self.memory_size, runtime: self.runtime)
+  def update_remote_configuration!(timeout: self.timeout, memory_size: self.memory_size, runtime: self.runtime)
     ActiveRecord::Base.transaction do
       update!({
         timeout: timeout,
@@ -72,23 +73,21 @@ class Function < ApplicationRecord
     end
   end
 
-  def destroy_remote_and_self!
-    ActiveRecord::Base.transaction do
-      destroy!
-      AWS_LAMBDA_CLIENT.delete_function({
-        function_name: remote_id,
-      })
-    end
+  def delete_remote_function!
+    AWS_LAMBDA_CLIENT.delete_function({
+      function_name: remote_id,
+    })
   end
 
   def invoke!(invocation_type: "RequestResponse", client_context: {}, payload: {})
+    payload = payload.to_json unless payload.is_a?(String)
     log_type = invocation_type == "RequestResponse" ? "Tail" : "None"
     AWS_LAMBDA_CLIENT.invoke({
       function_name: remote_id,
       invocation_type: invocation_type, # accepts Event, RequestResponse, DryRun
       log_type: log_type, # accepts None, Tail
-      # client_context: Base64.encode64(client_context.to_json),
-      payload: payload.to_json,
+      client_context: Base64.encode64(client_context.to_json),
+      payload: payload,
     })
   end
 
