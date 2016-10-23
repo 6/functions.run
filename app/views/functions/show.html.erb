@@ -31,7 +31,7 @@
   <div class="fr w-40 bl b--black-10 h-100 pa4" ng-controller="functions-app.function-invocation-controller">
     <p class="f4 b mv0">Run the function</p>
     <p class="black-50 lh-copy f6">Supply input to the function (if applicable) and press the "Run" button to try it out.</p>
-    <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" placeholder='Enter your function input here.' ng-model="invocationRequest.payload"></textarea>
+    <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" placeholder='Enter your function input here in JSON format.' ng-model="invocationRequest.payload"></textarea>
     <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink cursor-pointer" ng-click="invokeFunction()" ng-disabled="state.invoking">
       Run <i class="icono-play ml2"></i>
     </button>

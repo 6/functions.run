@@ -24,6 +24,13 @@
     });
 
     $scope.invokeFunction = function() {
+      var payload = $.trim($scope.invocationRequest.payload);
+      if (!payload || payload === "") {
+        payload = "{}";
+      }
+      if (!isValidJson(payload)) {
+        return window.alert("Input must be valid JSON.");
+      }
       $scope.state.invoking = true;
       functionsService.invokeFunction($scope.function.id, $scope.invocationRequest.payload).$promise.then(function(invocation) {
         try {
@@ -34,6 +41,15 @@
         $scope.invocation = invocation;
         $scope.state.invoking = false;
       });
+    }
+
+    function isValidJson(str) {
+      try {
+        JSON.parse(str);
+      } catch (e) {
+        return false;
+      }
+      return true;
     }
   }
 
