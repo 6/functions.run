@@ -2,6 +2,9 @@
   <section class="dt w-100 ph4 center">
     <div class="dtc v-mid">
       <h1 class="f4 mb1">
+        <% if @function.private? %>
+          <i class="fa fa-lock gold mr1" aria-hidden="true"></i>
+        <% end %>
         <a href="<%= user_path(@function.user.username) %>" class="no-underline blue dim">
           <%= @function.user.username %>
         </a>
@@ -41,8 +44,10 @@
     <p class="f4 b mv0">Run the function</p>
     <p class="black-50 lh-copy f6">Supply input to the function (if applicable) and press the "Run" button to try it out.</p>
     <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" placeholder='Enter your function input here in JSON format.' ng-model="invocationRequest.payload"></textarea>
-    <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink cursor-pointer" ng-click="invokeFunction()" ng-disabled="state.invoking">
-      {{ state.invoking ? 'Running' : 'Run' }} <i class="icono-play ml2"></i>
+    <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink" ng-click="invokeFunction()" ng-disabled="state.invoking">
+      <span class="pr2">{{ state.invoking ? 'Running' : 'Run' }}</span>
+      <i class="fa fa-play" aria-hidden="true" ng-show="!state.invoking"></i>
+      <i class="fa fa-spinner" aria-hidden="true" ng-show="state.invoking"></i>
     </button>
 
     <div ng-if="invocation">
