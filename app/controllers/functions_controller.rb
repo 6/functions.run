@@ -23,6 +23,15 @@ class FunctionsController < ApplicationController
     end
   end
 
+  def destroy
+    @function = current_user!.functions.find(params[:id])
+    ActiveRecord::Base.transaction do
+      @function.delete_remote_function!
+      @function.destroy!
+    end
+    redirect_to user_path(current_user.username)
+  end
+
 private
 
   def create_user_function_params

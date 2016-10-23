@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :functions, only: [:index, :new, :create]
+  resources :functions, only: [:index, :new, :create, :destroy]
 
   get '/signup' => 'users#new', as: :new_user
   post '/signup' => 'users#create', as: :create_user

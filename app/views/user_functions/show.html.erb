@@ -20,7 +20,12 @@
     </div>
     <div class="dtc v-mid">
       <div class="f5 tr mb1 black-60"><%= @function.runtime_name %></div>
-      <div class="f6 tr black-40" title="<%= @function.created_at %>">Created <%= time_ago_in_words(@function.created_at) %> ago</div>
+      <div class="f6 tr black-40">
+        <span title="<%= @function.created_at %>">Created <%= time_ago_in_words(@function.created_at) %> ago.</span>
+        <% if current_user&.id == @function.user_id %>
+          <%= link_to 'Delete', @function,  method: :delete, data: { confirm: 'Are you sure?' }, class: "light-red" %>
+        <% end %>
+      </div>
     </div>
   </section>
 </div>
