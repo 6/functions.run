@@ -1,2 +1,2 @@
 def <%= name %>(input, callback):
-  <%= code %>
+    <%= code %>
