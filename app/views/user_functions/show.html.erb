@@ -34,7 +34,7 @@
 </div>
 
 <main class="w-100 center cf js-stretch-to-bottom">
-  <div class="fl w-60 h-100" ng-controller="functions-app.function-editor-controller" ng-cloak>
+  <div class="fl w-60 h-100 code-editor-container" ng-controller="functions-app.function-editor-controller" ng-cloak>
     <div
       ui-codemirror="{onLoad : codemirrorLoaded}"
       ng-model="function.code_with_template" class="h-100"></div>
@@ -42,8 +42,13 @@
 
   <div class="fr w-40 bl b--black-10 h-100 pa4 code-runner-container" ng-controller="functions-app.function-invocation-controller" ng-cloak>
     <p class="f4 b mv0">Run the function</p>
-    <p class="black-50 lh-copy f6">Supply input to the function (if applicable) and press the "Run" button to try it out.</p>
-    <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" placeholder='Enter your function input here in JSON format.' ng-model="invocationRequest.payload"></textarea>
+    <p class="black-50 lh-copy f6">Supply JSON input to the function (if applicable) and press the "Run" button to try it out.</p>
+    <textarea
+      class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100"
+      rows="4"
+      ng-model="invocationRequest.payload"
+      ui-codemirror="{onLoad : codemirrorLoaded}">
+    </textarea>
     <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink " ng-click="invokeFunction()" ng-disabled="state.invoking">
       <span class="pr2">{{ state.invoking ? 'Running' : 'Run' }}</span>
       <i class="fa fa-play" aria-hidden="true" ng-show="!state.invoking"></i>
@@ -54,12 +59,12 @@
       <p ng-if="invocation.error" class="light-red f6">There was an error of type <b>{{invocation.error}}</b>.</p>
       <p ng-if="!invocation.error" class="green f6">Your request completed successfully.</p>
       <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error" spellcheck="false">{{invocation.payload}}</textarea>
-      <div ng-if="invocation.log" class="f6">
+      <p ng-if="invocation.log" class="f6">
         <a class="blue" ng-click="expandLogs()">
           View logs
           <i class="fa fa-external-link" aria-hidden="true"></i>
         </a>
-      </div>
+      </p>
     </div>
   </div>
 </main>

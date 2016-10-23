@@ -8,20 +8,33 @@
   Controller.$inject = [
     '$scope',
     'functions-app.functions-service',
+    'functions-app.users-service',
   ];
 
-  function Controller($scope, functionsService) {
+  function Controller($scope, functionsService, usersService) {
     $scope.function = null;
     $scope.state = {
       invoking: false,
     };
     $scope.invocationRequest = {
-      payload: "",
+      payload: '{}',
     };
 
     functionsService.getFunction(null, true).$promise.then(function(fn) {
       $scope.function = fn;
     });
+
+    $scope.codemirrorLoaded = function(editor) {
+      editor.setOption('theme', 'github');
+      editor.setOption('lineWrapping', true);
+      editor.setOption('lineNumbers', false);
+      editor.setOption('mode', "application/json");
+      // editor.setOption('gutters', ["CodeMirror-lint-markers"]);
+      // editor.setOption('lint', true);
+      if (!usersService.isLoggedIn()) {
+        editor.focus();
+      }
+    };
 
     $scope.invokeFunction = function() {
       var payload = $.trim($scope.invocationRequest.payload);

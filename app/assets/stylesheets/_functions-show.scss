@@ -1,20 +1,13 @@
-#code-editor {
-  min-height: 200px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
 .code-input, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea.code-input {
   font-family: Consolas, Menlo, Courier, monospace;
   font-size: 13px;
   resize: none;
 }
 
-.CodeMirror {
-  height: 100%;
+.code-editor-container {
+  .CodeMirror {
+    height: 100%;
+  }
 }
 
 .code-uneditable {
@@ -24,4 +17,10 @@
 
 .code-runner-container {
   overflow-y: scroll;
+
+  .CodeMirror {
+    @extend .ba;
+    @extend .b--black-10;
+    height: 110px;
+  }
 }

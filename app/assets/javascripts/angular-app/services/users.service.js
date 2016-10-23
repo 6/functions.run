@@ -7,8 +7,13 @@
 
   function Service() {
     var service = {};
+    service.isLoggedIn = isLoggedIn;
     service.getCurrentUser = getCurrentUser;
     service.canCurrentUserEditFunction = canCurrentUserEditFunction;
+
+    function isLoggedIn() {
+      return !!getCurrentUser();
+    }
 
     function getCurrentUser() {
       return window.data.currentUser;
