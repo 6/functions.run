@@ -2,6 +2,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require codemirror/lib/codemirror
+//= require codemirror/mode/javascript/javascript
+//= require codemirror/mode/python/python
 //= require angular
 //= require angular-animate
 //= require angular-resource

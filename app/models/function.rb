@@ -21,6 +21,11 @@ class Function < ApplicationRecord
     "nodejs4.3" => "javascript",
     "python2.7" => "python",
   }
+  RUNTIME_VERSIONS = {
+    "java8" => 8,
+    "nodejs4.3" => 4.3,
+    "python2.7" => 2.7,
+  }
 
   MEMORY_SIZES = [
     128,
@@ -105,10 +110,15 @@ class Function < ApplicationRecord
     RUNTIME_LANGUAGES[runtime]
   end
 
+  def runtime_version
+    RUNTIME_VERSIONS[runtime]
+  end
+
   def as_json(options = {})
     super(options).merge({
       runtime_name: runtime_name,
       runtime_language: runtime_language,
+      runtime_version: runtime_version,
       code_with_template: code_with_template(use_public_template: true),
       disable_first_line_editing: disable_first_line_editing?,
       disable_final_line_editing: disable_final_line_editing?,

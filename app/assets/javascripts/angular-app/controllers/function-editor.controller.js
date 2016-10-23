@@ -22,17 +22,14 @@
       setLanguageSpecificEditorConfig();
     });
 
-    $scope.aceLoaded = function(_editor){
+    $scope.codemirrorLoaded = function(_editor){
       editor = _editor;
-      console.log("aceLoaded");
+      console.log("codemirrorLoaded");
 
-      editor.setTheme("ace/theme/github");
-      editor.setOptions({
-        fontFamily: "Consolas, Menlo, Courier, monospace",
-        fontSize: "13px",
-      });
-      editor.setShowPrintMargin(false);
-      editor.getSession().setUseWrapMode(true);
+      editor.setOption('theme', 'github');
+      editor.setOption('lineWrapping', true);
+      editor.setOption('lineNumbers', true);
+      editor.focus();
 
       setLanguageSpecificEditorConfig();
     }
@@ -42,35 +39,8 @@
         return;
       }
 
-      editor.session.setMode("ace/mode/" + $scope.function.runtime_language);
-
-      editor.commands.on("exec", function(e) {
-        var rowCol = editor.selection.getCursor();
-        console.log(rowCol.row, rowCol.column, e.command.name);
-
-        function preventTyping() {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-
-        if (rowCol.row == 0 && $scope.function.disable_first_line_editing) {
-          preventTyping();
-        }
-
-        if ((rowCol.row + 1) == editor.session.getLength() && $scope.function.disable_final_line_editing) {
-          preventTyping();
-        }
-
-        if (rowCol.row === 1 && rowCol.column === 0 && $scope.disable_first_line_editing && e.command.name === "backspace") {
-          preventTyping();
-        }
-      });
-
-
-      // Ace adds vertical scrolling unless you do this.
-      $timeout(function() {
-        $(window).trigger('resize');
-      }, 100);
+      editor.setOption('mode', {name: $scope.function.runtime_language, version: $scope.function.runtime_version});
+      editor.getDoc().markClean();
     }
   }
 
