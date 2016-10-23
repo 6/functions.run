@@ -5,7 +5,6 @@
 //= require codemirror/mode/javascript/javascript
 //= require codemirror/mode/python/python
 //= require angular
-//= require angular-animate
 //= require angular-resource
 //= require angular-ui-codemirror/ui-codemirror
 //= require stretch-to-bottom
