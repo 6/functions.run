@@ -49,7 +49,7 @@
       $timeout(function() {
         var doc = editor.getDoc();
         editor.setOption('readOnly', false);
-        if ($scope.function.disable_final_line_editing) {
+        if ($scope.function.disable_first_line_editing) {
           doc.markText(
             {line: 0, ch: 0},
             {line: 1, ch: 0},
