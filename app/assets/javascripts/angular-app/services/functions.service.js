@@ -37,8 +37,8 @@
       }
     }
 
-    function invokeFunction(id) {
-      return functionInvocationsResource().save({id: id}, {});
+    function invokeFunction(id, payload) {
+      return functionInvocationsResource().save({id: id}, {payload: payload});
     }
 
     return service;
