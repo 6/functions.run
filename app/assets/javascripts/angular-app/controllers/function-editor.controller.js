@@ -41,11 +41,21 @@
 
       $timeout(function() {
         var doc = editor.getDoc();
-        doc.markText(
-          {line: 0, ch: 0},
-          {line: 1, ch: 0},
-          {className: "code-uneditable", readOnly: true}
-        );
+        if ($scope.function.disable_final_line_editing) {
+          doc.markText(
+            {line: 0, ch: 0},
+            {line: 1, ch: 0},
+            {className: "code-uneditable", readOnly: true}
+          );
+
+          editor.on('keydown', function(cm, e) {
+            var doc = cm.getDoc();
+            var cursor = doc.getCursor();
+            if (cursor.line === 0 && cursor.ch === 0) {
+              e.preventDefault();
+            }
+          });
+        }
         if ($scope.function.disable_final_line_editing) {
           doc.markText(
             {line: doc.lineCount() - 1, ch: 0},
