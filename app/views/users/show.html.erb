@@ -14,7 +14,7 @@
     <% end %>
     <h1 class="mv2 truncate"><%= @user.username %></h1>
     <p class="lh-copy f6 black-40">
-      <%= @user.username %> joined on <%= @user.created_at.strftime("%b %-d, %Y") %> and has <%= @functions.size %> functions.
+      <%= @user.username %> joined on <%= @user.created_at.strftime("%b %-d, %Y") %> and has <%= pluralize(@functions.size, "function") %>.
     </p>
   </div>
   <div class="w-70 fl mt3 bt b--black-05">
