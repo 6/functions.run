@@ -29,7 +29,7 @@ class FunctionsController < ApplicationController
 
   def update
     @function = current_user!.functions.find(params[:id])
-    if @function.update!(update_function_params)
+    if @function.update(update_function_params)
       redirect_to user_function_path(current_user!.username, @function.name)
     else
       render :edit
