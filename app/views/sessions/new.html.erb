@@ -1,9 +1,28 @@
-<h1>Log In</h1>
+<div class="form-container small">
+  <h1 class="f3">Log In</h1>
 
-<%= form_tag create_session_path do %>
+  <%= form_tag create_session_path do %>
+    <% if @invalid %>
+      <p class="light-red">Invalid login credentials.</p>
+    <% end %>
 
-  Email or username: <%= text_field_tag :email_or_username %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
+    <div class="mt3">
+      <label class="db fw6 lh-copy f6">Username or email</label>
+      <%= text_field_tag :email_or_username, params[:email_or_username], class: "pa2 input-reset ba bg-transparent b--black-50 w-100" %>
+    </div>
 
-<% end %>
+    <div class="mt3">
+      <div class="cf">
+        <label class="fl db w-50 fw6 lh-copy f6">Password</label>
+        <div class="fl tr w-50 lh-copy f6">
+          <a class="blue" href="<%= new_password_reset_path %>">Forgot password?</a>
+        </div>
+      </div>
+      <%= password_field_tag :password, "", class: "pa2 input-reset ba bg-transparent b--black-50 w-100" %>
+    </div>
+
+    <div class="mt3">
+      <%= submit_tag "Log in", class: "b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" %>
+    </div>
+  <% end %>
+</div>

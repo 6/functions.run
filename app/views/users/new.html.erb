@@ -1,8 +1,32 @@
-<h1>Sign Up</h1>
+<div class="form-container small">
+  <h1 class="f3">Sign up</h1>
 
-<%= form_for :user, path: create_user_path do |f| %>
-  Username: <%= f.text_field :username %>
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  <%= f.submit "Submit" %>
-<% end %>
+  <%= form_for @user, url: create_user_path do |f| %>
+    <% if @user.errors.any? %>
+      <ul class="form-errors pl3">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li class="form-error f6 light-red"><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="mt3">
+      <label class="db fw6 lh-copy f6">Username</label>
+      <%= f.text_field :username, class: "pa2 input-reset ba bg-transparent b--black-50 w-100" %>
+    </div>
+
+    <div class="mt3">
+      <label class="db fw6 lh-copy f6">Email</label>
+      <%= f.text_field :email, class: "pa2 input-reset ba bg-transparent b--black-50 w-100" %>
+    </div>
+
+    <div class="mt3">
+      <label class="db fw6 lh-copy f6">Password</label>
+      <%= f.password_field :password, class: "pa2 input-reset ba bg-transparent b--black-50 w-100" %>
+    </div>
+
+    <div class="mt3">
+      <%= submit_tag "Sign Up", class: "b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" %>
+    </div>
+  <% end %>
+</div>

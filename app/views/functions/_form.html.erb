@@ -1,20 +1,41 @@
 <%= form_for @function do |f| %>
   <% if @function.errors.any? %>
-    <ul>
+    <ul class="form-errors pl3">
       <% @function.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li class="form-error light-red f6"><%= msg %></li>
       <% end %>
     </ul>
   <% end %>
 
-  Name: <%= f.text_field :name %>
-  Description: <%= f.text_field :description %>
-  Runtime:
+  <div class="mt3">
+    <label class="db fw6 lh-copy f6">Function name</label>
+    <%= f.text_field :name, class: "pa2 input-reset ba bg-transparent b--black-50 w-100", placeholder: "Enter a unique function name" %>
+    <small class="black-50">Function names can only contain letters, numbers, and underscores.</small>
+  </div>
+
+  <div class="mt3">
+    <label class="db fw6 lh-copy f6">Description (optional)</label>
+    <%= f.text_field :description, class: "pa2 input-reset ba bg-transparent b--black-50 w-100", placeholder: "Enter a short description for your function" %>
+  </div>
+
+  <div class="mt3">
+    <label class="db fw6 lh-copy f6">Runtime</label>
     <% if @function.new_record? %>
-      <%= f.select(:runtime, options_for_select(Function::RUNTIMES.map { |runtime| [Function.runtime_name(runtime), runtime] }, @function.runtime)) %>
+      <div><%= f.select(:runtime, options_for_select(Function::RUNTIMES.map { |runtime| [Function.runtime_name(runtime), runtime] }, @function.runtime)) %></div>
     <% else %>
-      <%= f.select(:runtime, options_for_select([[Function.runtime_name(@function.runtime), @function.runtime]]), {}, {disabled: true}) %>
+      <div><%= f.select(:runtime, options_for_select([[Function.runtime_name(@function.runtime), @function.runtime]]), {}, {disabled: true}) %></div>
+      <small class="black-50">You cannot modify the runtime after a function has been created.</small>
     <% end %>
-  Private? <%= f.check_box :private %>
-  <%= f.submit "Submit" %>
+  </div>
+
+  <div class="mt3">
+    <label class="lh-copy f6">
+      <%= f.check_box :private %>
+      Make this private
+    </label>
+  </div>
+
+  <div class="mt3">
+    <%= f.submit "Submit", class: "b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" %>
+  </div>
 <% end %>

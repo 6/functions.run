@@ -1,3 +1,11 @@
-<h1>Edit function</h1>
+<div class="form-container">
+  <h1 class="f3">Edit function</h1>
 
-<%= render 'form' %>
+  <%= render 'form' %>
+
+  <h1 class="f3 mt4">Delete function</h1>
+
+  <p>Permanently delete this function. Warning: this is irreversible!</p>
+
+  <%= link_to 'Delete', @function,  method: :delete, data: { confirm: 'Are you sure?' }, class: "f6 bn grow br2 ph3 pv2 mb2 dib white bg-light-red no-underline" %>
+</div>

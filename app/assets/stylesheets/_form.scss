@@ -1,0 +1,9 @@
+.form-container {
+  max-width: 540px;
+  padding: 20px;
+  margin: 0 auto;
+
+  &.small {
+    max-width: 340px;
+  }
+}

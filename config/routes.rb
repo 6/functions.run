@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :functions
+  resources :password_resets, path: 'password-resets', only: [:new]
 
   get '/signup' => 'users#new', as: :new_user
   post '/signup' => 'users#create', as: :create_user
