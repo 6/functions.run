@@ -39,6 +39,9 @@
       }
 
       editor.setOption('mode', {name: $scope.function.runtime_language, version: $scope.function.runtime_version});
+      editor.setOption('tabSize', $scope.function.runtime_tab_size);
+      editor.setOption('indentUnit', $scope.function.runtime_tab_size);
+
       editor.getDoc().markClean();
 
       if (!usersService.canCurrentUserEditFunction($scope.function)) {
@@ -52,7 +55,7 @@
         if ($scope.function.disable_first_line_editing) {
           doc.markText(
             {line: 0, ch: 0},
-            {line: 1, ch: 0},
+            {line: 0, ch: doc.getLine(0).length},
             {className: "code-uneditable", readOnly: true}
           );
           editor.setCursor({line: 1, ch: 0});
