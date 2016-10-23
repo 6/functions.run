@@ -15,7 +15,7 @@ describe Api::FunctionsController do
     end
     let(:params) do
       {
-        name: "my-function",
+        name: "my_function",
         code: "console.log('yo')",
         runtime: "nodejs4.3",
       }
@@ -25,7 +25,7 @@ describe Api::FunctionsController do
       it "returns OK and creates a Function" do
         expect { post :create, params: params }.to change(Function, :count).by(1)
         expect(response).to be_ok
-        expect(response_json[:name]).to eq("my-function")
+        expect(response_json[:name]).to eq("my_function")
       end
     end
 
@@ -34,7 +34,7 @@ describe Api::FunctionsController do
         lambda_create_function.and_raise(RuntimeError)
       end
 
-      it "retursn 500 and does not create a Function" do
+      it "returns 500 and does not create a Function" do
         expect { post :create, params: params }.not_to change(Function, :count)
         expect(response.status).to eq(500)
       end
@@ -42,13 +42,13 @@ describe Api::FunctionsController do
   end
 
   describe "PUT #update" do
-    let(:function) { FactoryGirl.create(:function, name: "old-fn", description: "old", code: "console.log('old')", private: false) }
+    let(:function) { FactoryGirl.create(:function, name: "old_fn", description: "old", code: "console.log('old')", private: false) }
 
     context "with only local function params specified" do
       let(:params) do
         {
           id: function.id,
-          name: "new-function",
+          name: "new_function",
           description: "new",
           private: true,
         }
@@ -57,7 +57,7 @@ describe Api::FunctionsController do
       it "updates the specified attributes" do
         put :update, params: params
         function.reload
-        expect(function.name).to eq("new-function")
+        expect(function.name).to eq("new_function")
         expect(function.description).to eq("new")
         expect(function).to be_private
       end
