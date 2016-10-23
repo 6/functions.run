@@ -1,5 +1,8 @@
 var stretchToBottom = function(el) {
   var $el = $(el);
+  if ($el.length === 0) {
+    return;
+  }
   var newHeight = $(window).height() - $el.offset().top;
   $el.height(newHeight);
 }
