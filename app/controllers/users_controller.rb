@@ -7,7 +7,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_username_case_insensitive!(params[:username])
-    @functions = @user.functions.order(updated_at: :desc)
+    if @user.id == current_user&.id
+      @functions = @user.functions
+    else
+      @functions = @user.functions.where(private: false)
+    end
+    @functions = @functions.order(updated_at: :desc)
   end
 
   def create
