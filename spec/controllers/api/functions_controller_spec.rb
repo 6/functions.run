@@ -20,6 +20,7 @@ describe Api::FunctionsController do
         runtime: "nodejs4.3",
       }
     end
+    before(:each) { stub_api_key! }
 
     context "AWS successfully creates remote function" do
       it "returns OK and creates a Function" do
@@ -43,6 +44,7 @@ describe Api::FunctionsController do
 
   describe "PUT #update" do
     let(:function) { FactoryGirl.create(:function, name: "old_fn", description: "old", code: "console.log('old')", private: false) }
+    before(:each) { stub_api_key!(function.user) }
 
     context "with only local function params specified" do
       let(:params) do
@@ -107,6 +109,7 @@ describe Api::FunctionsController do
       allow(AWS_LAMBDA_CLIENT).to receive(:delete_function)
         .with(function_name: function.remote_id)
     end
+    before(:each) { stub_api_key!(function.user) }
 
     context "AWS successfully deletes remote function" do
       it "returns OK and destroys the local function" do
