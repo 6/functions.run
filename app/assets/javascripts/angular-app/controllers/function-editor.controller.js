@@ -13,12 +13,9 @@
 
   function Controller($scope, $timeout, functionsService) {
     var editor;
-    $scope.function = {};
-    $scope.functionLoading = true;
+    $scope.function = null;
     functionsService.getFunction(null, true).$promise.then(function(fn) {
       $scope.function = fn;
-      $scope.functionLoading = false;
-      console.log("OKAY", $scope.function);
       setLanguageSpecificEditorConfig();
     });
 
@@ -35,7 +32,7 @@
     }
 
     function setLanguageSpecificEditorConfig() {
-      if (!editor || $scope.functionLoading) {
+      if (!editor || !$scope.function) {
         return;
       }
 
@@ -55,6 +52,15 @@
             {line: doc.lineCount(), ch: 0},
             {className: "code-uneditable", readOnly: true}
           );
+
+          editor.on('keydown', function(cm, e) {
+            var doc = cm.getDoc();
+            var cursorIsOnFinalLine = (doc.lineCount() - 1) === doc.getCursor().line;
+            var cursorIsOnFinalCharacter = doc.getLine(doc.lastLine()).length === doc.getCursor().ch;
+            if (e.key === "Enter" && cursorIsOnFinalLine && cursorIsOnFinalCharacter) {
+              e.preventDefault();
+            }
+          });
         }
       }, 100);
     }
