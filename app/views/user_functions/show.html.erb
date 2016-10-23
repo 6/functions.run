@@ -1,3 +1,7 @@
+<%
+  title("Functions.run - #{@function.user.username}/#{@function.name}")
+  description([@function.name, @function.description.presence].compact.join(" - "))
+%>
 <div class="bb b--black-10">
   <section class="dt w-100 ph4 center">
     <div class="dtc v-mid">

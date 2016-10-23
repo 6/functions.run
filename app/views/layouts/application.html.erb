@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="functions-app">
   <head>
-    <title>Functions.run</title>
-    <meta name="description" content="Build and run functions in the cloud. Share and collaborate with others on functions.">
+    <title><%= yield(:title).presence || "Functions.run" %></title>
+    <meta name="description" content="<%= yield(:description).presence || 'Build and run functions in the cloud. Share and collaborate with others on functions.' %>">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
