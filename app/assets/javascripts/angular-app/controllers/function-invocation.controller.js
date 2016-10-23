@@ -40,6 +40,9 @@
         }
         $scope.invocation = invocation;
         $scope.state.invoking = false;
+      }, function() {
+        window.alert("Something went wrong!");
+        $scope.state.invoking = false;
       });
     }
 
