@@ -90,13 +90,13 @@
 
         <h3>Step 2. Invoke the function</h3>
         <p class="black-50 mt0 lh-copy f6">Make a <b>POST</b> request to the following endpoint and specify your API key in the <b>X-Api-Key</b> header. Also specify a <b>payload</b> in your JSON request body.</p>
-        <p><input type="text" class="input-reset b--black-20 black f6 w-100" value="<%= api_function_invocations_url(@function) %>"></p>
+        <p><input type="text" class="input-reset b--black-20 black f6 w-100" value="<%= api_function_invocations_url(@function, protocol: 'https') %>"></p>
 
         <h3>Example: cURL</h3>
         <textarea class=" pa2 input-reset code-input hover-bg-white b--black-20 black w-100" rows="3">curl -H "Content-Type: application/json" \
      -H "X-Api-Key: <%= current_user&.api_key || 'your-api-key' %>" \
      -X POST -d '{"payload": "{}"}' \
-     <%= api_function_invocations_url(@function) %></textarea>
+     <%= api_function_invocations_url(@function, protocol: 'https') %></textarea>
       </div>
     </div>
   </main>
