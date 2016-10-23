@@ -2,7 +2,11 @@
   <section class="dt w-100 ph4 center">
     <div class="dtc v-mid">
       <h1 class="f4 mb1">
-        <a href="<%= function_path(@function) %>" class="no-underline blue dim">
+        <a href="<%= user_path(@function.user.username) %>" class="no-underline blue dim">
+          <%= @function.user.username %>
+        </a>
+        <span class="black-30">/</span>
+        <a href="<%= user_function_path(@function.user.username, @function.name) %>" class="no-underline blue dim">
           <%= @function.name %>
         </a>
       </h1>

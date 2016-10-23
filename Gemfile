@@ -16,6 +16,12 @@ gem 'aws-sdk', '2.6.12'
 gem 'rack-canonical-host'
 gem 'rubyzip'
 gem 'angularjs-rails'
+gem 'activevalidators'
+gem 'font-awesome-sass'
+
+group :development, :test do
+  gem 'zeus'
+end
 
 group :development do
   gem 'web-console'

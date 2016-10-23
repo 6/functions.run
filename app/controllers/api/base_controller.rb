@@ -1,4 +1,7 @@
 class Api::BaseController < ActionController::Base
+  include CurrentUser
+  include ExceptionHandling
+
   class ::Exception
     def error_type
       self.class.to_s.underscore.split("/").last
@@ -18,6 +21,11 @@ class Api::BaseController < ActionController::Base
     end
   end
 
+  rescue_from Unauthorized do |e|
+    log_exception(e)
+    render json: e.as_api_json, status: 403
+  end
+
   rescue_from ActiveRecord::RecordNotFound do |e|
     log_exception(e)
     render json: e.as_api_json, status: 404
@@ -32,12 +40,5 @@ class Api::BaseController < ActionController::Base
     log_exception(e)
     Rollbar.error(e)
     render json: e.as_api_json, status: 500
-  end
-
-private
-
-  def log_exception(exception)
-    Rails.logger.error "#{exception.error_type}: #{exception.message}"
-    Rails.logger.error "Backtrace: #{exception.backtrace.join("\n")}"
   end
 end

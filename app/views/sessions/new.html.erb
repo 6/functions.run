@@ -1,0 +1,9 @@
+<h1>Log In</h1>
+
+<%= form_tag create_session_path do %>
+
+  Email or username: <%= text_field_tag :email_or_username %>
+  Password: <%= password_field_tag :password %>
+  <%= submit_tag "Submit" %>
+
+<% end %>

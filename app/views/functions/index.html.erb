@@ -3,7 +3,7 @@
     <article class="cf w-100 bb b--black-05 pv3 ph2">
       <div class="fl w-60 v-mid">
         <h1 class="f6 f5-ns fw6 lh-title black mv0">
-          <a href="<%= function_path(function) %>" class="dim blue no-underline">
+          <a href="<%= user_function_path(function.user.username, function.name) %>" class="dim blue no-underline">
             <%= function.name %>
           </a>
         </h1>

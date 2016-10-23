@@ -1,19 +1,20 @@
 class Api::FunctionsController < Api::BaseController
   def show
     @function = Function.find(params[:id])
+    @function.authorize!(current_user)
     render json: @function
   end
 
   def create
     ActiveRecord::Base.transaction do
-      @function = Function.create!(create_function_params)
+      @function = current_user!.functions.create!(create_function_params)
       @function.create_remote_function!
     end
     render json: @function
   end
 
   def update
-    @function = Function.find(params[:id])
+    @function = current_user!.functions.find(params[:id])
     ActiveRecord::Base.transaction do
       @function.update!(update_local_function_params) if update_local_function_params.present?
       @function.update_remote_function!(update_remote_function_params) if update_remote_function_params.present?
@@ -22,7 +23,7 @@ class Api::FunctionsController < Api::BaseController
   end
 
   def destroy
-    @function = Function.find(params[:id])
+    @function = current_user!.functions.find(params[:id])
     ActiveRecord::Base.transaction do
       @function.delete_remote_function!
       @function.destroy!

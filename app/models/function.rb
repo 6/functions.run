@@ -36,7 +36,10 @@ class Function < ApplicationRecord
     # 1536,
   ]
 
-  validates :name, presence: true, format: {with: /\A[_a-zA-Z0-9]+\z/}, length: {maximum: 100}
+  belongs_to :user, inverse_of: :functions
+
+  validates :user, presence: true
+  validates :name, presence: true, format: {with: /\A[_a-zA-Z0-9]+\z/}, length: {maximum: 100}, uniqueness: {scope: [:user_id]}
   validates :description, length: {maximum: 500}
   validates :remote_id, presence: true, uniqueness: true
   validates :runtime, inclusion: {in: RUNTIMES}
@@ -46,6 +49,16 @@ class Function < ApplicationRecord
   validates :private, inclusion: {in: [true, false]}
 
   before_validation :set_defaults, on: :create
+
+  def self.runtime_name(runtime)
+    RUNTIME_NAMES[runtime]
+  end
+
+  def authorize!(current_user)
+    if private? && user_id != current_user&.id
+      raise ActiveRecord::RecordNotFound
+    end
+  end
 
   # http://docs.aws.amazon.com/sdkforruby/api/Aws/Lambda/Client.html#create_function-instance_method
   def create_remote_function!
@@ -103,7 +116,7 @@ class Function < ApplicationRecord
   end
 
   def runtime_name
-    RUNTIME_NAMES[runtime]
+    self.class.runtime_name(runtime)
   end
 
   def runtime_language
@@ -158,17 +171,26 @@ private
   def code_with_template(use_public_template: false)
     filename = "template.erb.#{file_extension}"
     filename = "public_#{filename}" if use_public_template
-    file_contents = File.read(Rails.root.join("app/views/lambda_templates/#{filename}"))
-    erb_binding = binding
-    erb_binding.local_variable_set(:code, code)
-    erb_binding.local_variable_set(:name, name)
-    ERB.new(file_contents).result(erb_binding).strip
+    read_template(filename)
   end
 
   def set_defaults
-    self.remote_id = "function-#{SecureRandom.urlsafe_base64(40)}"
+    self.remote_id = "function_#{SecureRandom.urlsafe_base64(40)}"
     self.memory_size ||= 128
     self.timeout ||= 3
     self.private ||= false
+    self.code ||= default_code_template
+  end
+
+  def default_code_template
+    read_template("default_template.erb.#{file_extension}")
+  end
+
+  def read_template(filename)
+    file_contents = File.read(Rails.root.join("app/views/lambda_templates/#{filename}"))
+    erb_binding = binding
+    erb_binding.local_variable_set(:code, code) if code
+    erb_binding.local_variable_set(:name, name) if name
+    ERB.new(file_contents).result(erb_binding).strip
   end
 end
