@@ -17,7 +17,22 @@
       <%= @user.username %> joined on <%= @user.created_at.strftime("%b %-d, %Y") %> and has <%= pluralize(@functions.size, "function") %>.
     </p>
   </div>
-  <div class="w-70 fl mt3 bt b--black-05">
-    <%= render partial: "functions/list", locals: {functions: @functions} %>
+  <div class="w-70 fl mt3">
+    <% if @functions.size == 0 %>
+      <div class="ba b--black-10 bg-black-05 tc pa4 br2">
+        <% if @is_self %>
+          <p class="f5 lh-copy black-50">You don't have any functions yet. Creating your first function just takes 30 seconds.</p>
+          <p>
+            <a class="f5 link dim br2 ph3 pv2 dib bg-pink white mr1" href="<%= new_function_path %>">Create a function</a>
+          </p>
+        <% else %>
+          <p class="f5 lh-copy black-50"><%= @user.username %> doesn't have any public functions yet.</p>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bt b--black-05">
+        <%= render partial: "functions/list", locals: {functions: @functions} %>
+      </div>
+    <% end %>
   </div>
 </main>
