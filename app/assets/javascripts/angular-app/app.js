@@ -3,7 +3,6 @@
 
   angular.module('functions-app', [
     'ngResource',
-    'ui.ace',
     'ui.codemirror',
   ]);
 
