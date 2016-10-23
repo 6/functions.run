@@ -41,6 +41,22 @@
 
       editor.setOption('mode', {name: $scope.function.runtime_language, version: $scope.function.runtime_version});
       editor.getDoc().markClean();
+
+      $timeout(function() {
+        var doc = editor.getDoc();
+        doc.markText(
+          {line: 0, ch: 0},
+          {line: 1, ch: 0},
+          {className: "code-uneditable", readOnly: true}
+        );
+        if ($scope.function.disable_final_line_editing) {
+          doc.markText(
+            {line: doc.lineCount() - 1, ch: 0},
+            {line: doc.lineCount(), ch: 0},
+            {className: "code-uneditable", readOnly: true}
+          );
+        }
+      }, 100);
     }
   }
 
