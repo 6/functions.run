@@ -54,7 +54,7 @@
       ng-model="invocationRequest.payload"
       ui-codemirror="{onLoad : codemirrorLoaded}">
     </textarea>
-    <button class="f6 bn grow br2 ph3 pv2 mt3 mb2 dib white bg-pink " ng-click="invokeFunction()" ng-disabled="state.invoking">
+    <button class="f6 bn grow br2 ph4 pv2 mt3 mb2 dib white bg-pink " ng-click="invokeFunction()" ng-disabled="state.invoking">
       <span class="pr2">{{ state.invoking ? 'Running' : 'Run' }}</span>
       <i class="fa fa-play" aria-hidden="true" ng-show="!state.invoking"></i>
       <i class="fa fa-spinner" aria-hidden="true" ng-show="state.invoking"></i>

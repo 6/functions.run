@@ -42,7 +42,7 @@
         payload = "{}";
       }
       if (!isValidJson(payload)) {
-        return window.alert("Input must be valid JSON.");
+        return showInvalidJsonModal();
       }
       $scope.state.invoking = true;
       functionsService.invokeFunction($scope.function.id, $scope.invocationRequest.payload).$promise.then(function(invocation) {
@@ -60,7 +60,7 @@
     }
 
     $scope.expandLogs = function() {
-      vex.dialog.open({
+      var vexInstance = vex.dialog.open({
         message: 'Logs',
         input: [
           '<textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="15" spellcheck="false">',
@@ -71,8 +71,18 @@
           $.extend({}, vex.dialog.buttons.YES, { text: 'Close' }),
         ],
       });
+      $(vexInstance.contentEl).css({'width': 'auto', 'max-width': '800px'});
 
     };
+
+    function showInvalidJsonModal() {
+      vex.dialog.open({
+        message: 'You must provide valid JSON input.',
+        buttons: [
+          $.extend({}, vex.dialog.buttons.YES, { text: 'Ok' }),
+        ],
+      });
+    }
 
     function isValidJson(str) {
       try {
