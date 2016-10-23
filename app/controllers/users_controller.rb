@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout "default"
   before_action :enforce_logged_out!, only: [:new, :create]
 
   def new

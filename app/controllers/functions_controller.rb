@@ -1,5 +1,4 @@
 class FunctionsController < ApplicationController
-  layout 'default'
   before_action :enforce_logged_in!, except: [:index]
 
   def index
