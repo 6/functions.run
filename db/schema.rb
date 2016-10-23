@@ -10,23 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023031117) do
+ActiveRecord::Schema.define(version: 20161023231928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "functions", force: :cascade do |t|
-    t.text     "name",        null: false
+    t.text     "name",                        null: false
     t.text     "description"
-    t.string   "remote_id",   null: false
-    t.string   "runtime",     null: false
-    t.text     "code",        null: false
-    t.integer  "memory_size", null: false
-    t.integer  "timeout",     null: false
-    t.boolean  "private",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "user_id",     null: false
+    t.string   "remote_id",                   null: false
+    t.string   "runtime",                     null: false
+    t.text     "code",                        null: false
+    t.integer  "memory_size",                 null: false
+    t.integer  "timeout",                     null: false
+    t.boolean  "private",                     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "user_id",                     null: false
+    t.boolean  "featured",    default: false
     t.index ["remote_id"], name: "index_functions_on_remote_id", unique: true, using: :btree
     t.index ["user_id", "name"], name: "index_functions_on_user_id_and_name", unique: true, using: :btree
     t.index ["user_id"], name: "index_functions_on_user_id", using: :btree

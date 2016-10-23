@@ -43,6 +43,8 @@ class Function < ApplicationRecord
 
   belongs_to :user, inverse_of: :functions
 
+  scope :featured, -> { where(featured: true) }
+
   validates :user, presence: true
   validates :name, presence: true, format: {with: /\A[_a-zA-Z0-9]+\z/}, length: {maximum: 100}, uniqueness: {scope: [:user_id]}
   validates :description, length: {maximum: 500}

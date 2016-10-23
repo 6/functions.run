@@ -11,4 +11,14 @@
   </div>
 </section>
 
-<section class="cf ph3 ph5-ns pt2 pb4 lightest-blue">
+<section class="cf ph3 ph5-ns pt2 pb4">
+  <h2 class="ttu tracked blue tc">Featured functions</h2>
+
+  <div class="mw7 center">
+    <%= render partial: "functions/list", locals: {functions: @featured_functions} %>
+  </div>
+
+  <h3 class="tc black-50 mv5">
+    <a href="<%= new_user_path %>" class="blue">Sign up now</a> and start creating your own functions!
+  </h3>
+</section>
