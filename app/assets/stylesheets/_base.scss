@@ -9,3 +9,9 @@ html, body {
 a, button {
   cursor: pointer;
 }
+
+.vex.vex-theme-plain .vex-content {
+  max-width: 800px;
+  width: auto;
+  line-height: 1.1em;  
+}

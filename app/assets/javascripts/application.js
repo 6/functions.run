@@ -7,5 +7,7 @@
 //= require angular
 //= require angular-resource
 //= require angular-ui-codemirror/ui-codemirror
+//= require vex/dist/js/vex.combined.js
+
 //= require stretch-to-bottom
 //= require angular-app/index

@@ -46,6 +46,21 @@
       });
     }
 
+    $scope.expandLogs = function() {
+      vex.dialog.open({
+        message: 'Logs',
+        input: [
+          '<textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="15" spellcheck="false">',
+              $scope.invocation.log,
+          '</textarea>',
+        ].join(''),
+        buttons: [
+          $.extend({}, vex.dialog.buttons.YES, { text: 'Close' }),
+        ],
+      });
+
+    };
+
     function isValidJson(str) {
       try {
         JSON.parse(str);

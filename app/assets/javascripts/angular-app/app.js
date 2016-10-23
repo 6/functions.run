@@ -10,5 +10,6 @@
     .config(Config);
 
   function Config() {
+    window.vex.defaultOptions.className = 'vex-theme-plain';
   }
 })();

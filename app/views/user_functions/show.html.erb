@@ -53,10 +53,12 @@
     <div ng-if="invocation">
       <p ng-if="invocation.error" class="light-red f6">There was an error of type <b>{{invocation.error}}</b>.</p>
       <p ng-if="!invocation.error" class="green f6">Your request completed successfully.</p>
-      <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error">{{invocation.payload}}</textarea>
-      <div ng-if="invocation.log">
-        <label>Log</label>
-        <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="10">{{invocation.log}}</textarea>
+      <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error" spellcheck="false">{{invocation.payload}}</textarea>
+      <div ng-if="invocation.log" class="f6">
+        <a class="blue" ng-click="expandLogs()">
+          View logs
+          <i class="fa fa-external-link" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </div>

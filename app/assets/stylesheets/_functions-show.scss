@@ -7,7 +7,7 @@
   bottom: 0;
 }
 
-.code-input {
+.code-input, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea.code-input {
   font-family: Consolas, Menlo, Courier, monospace;
   font-size: 13px;
   resize: none;
