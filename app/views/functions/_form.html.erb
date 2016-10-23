@@ -1,0 +1,20 @@
+<%= form_for @function do |f| %>
+  <% if @function.errors.any? %>
+    <ul>
+      <% @function.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  Name: <%= f.text_field :name %>
+  Description: <%= f.text_field :description %>
+  Runtime:
+    <% if @function.new_record? %>
+      <%= f.select(:runtime, options_for_select(Function::RUNTIMES.map { |runtime| [Function.runtime_name(runtime), runtime] }, @function.runtime)) %>
+    <% else %>
+      <%= f.select(:runtime, options_for_select([[Function.runtime_name(@function.runtime), @function.runtime]]), {}, {disabled: true}) %>
+    <% end %>
+  Private? <%= f.check_box :private %>
+  <%= f.submit "Submit" %>
+<% end %>

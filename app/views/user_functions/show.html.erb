@@ -26,7 +26,8 @@
       <div class="f6 tr black-40">
         <span title="<%= @function.created_at %>">Created <%= time_ago_in_words(@function.created_at) %> ago.</span>
         <% if current_user&.id == @function.user_id %>
-          <%= link_to 'Delete', @function,  method: :delete, data: { confirm: 'Are you sure?' }, class: "light-red" %>
+          <%= link_to 'Edit', edit_function_path(@function), class: 'blue pl11' %>
+          <%= link_to 'Delete', @function,  method: :delete, data: { confirm: 'Are you sure?' }, class: "light-red pl1" %>
         <% end %>
       </div>
     </div>
@@ -44,7 +45,7 @@
     <p class="f4 b mv0">Run the function</p>
     <p class="black-50 lh-copy f6">Supply input to the function (if applicable) and press the "Run" button to try it out.</p>
     <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" placeholder='Enter your function input here in JSON format.' ng-model="invocationRequest.payload"></textarea>
-    <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink" ng-click="invokeFunction()" ng-disabled="state.invoking">
+    <button class="f6 bn grow br2 ph3 pv2 mt2 mb2 dib white bg-pink " ng-click="invokeFunction()" ng-disabled="state.invoking">
       <span class="pr2">{{ state.invoking ? 'Running' : 'Run' }}</span>
       <i class="fa fa-play" aria-hidden="true" ng-show="!state.invoking"></i>
       <i class="fa fa-spinner" aria-hidden="true" ng-show="state.invoking"></i>

@@ -1,17 +1,3 @@
 <h1>Create a function</h1>
 
-<%= form_for @function do |f| %>
-  <% if @function.errors.any? %>
-    <ul>
-      <% @function.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  Name: <%= f.text_field :name %>
-  Description: <%= f.text_field :description %>
-  Runtime: <%= f.select(:runtime, options_for_select(Function::RUNTIMES.map { |runtime| [Function.runtime_name(runtime), runtime] } )) %>
-  Private? <%= f.check_box :private %>
-  <%= f.submit "Submit" %>
-<% end %>
+<%= render 'form' %>
