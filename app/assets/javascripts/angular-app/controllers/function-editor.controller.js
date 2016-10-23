@@ -47,8 +47,12 @@
             {line: 1, ch: 0},
             {className: "code-uneditable", readOnly: true}
           );
+          editor.setCursor({line: 1, ch: 0});
 
           editor.on('keydown', function(cm, e) {
+            if (e.key.match(/^Arrow/) || e.metaKey) {
+              return;
+            }
             var doc = cm.getDoc();
             var cursor = doc.getCursor();
             if (cursor.line === 0 && cursor.ch === 0) {
