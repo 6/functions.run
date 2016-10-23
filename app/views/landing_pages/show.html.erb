@@ -15,7 +15,13 @@
   <h2 class="ttu tracked blue tc">Featured functions</h2>
 
   <div class="mw7 center">
-    <%= render partial: "functions/list", locals: {functions: @featured_functions} %>
+    <% if @featured_functions.count > 0 %>
+      <%= render partial: "functions/list", locals: {functions: @featured_functions} %>
+    <% else %>
+      <div class="ba b--black-10 bg-black-05 tc pa4 br2">
+        <p>There are no featured functions at the moment.</p>
+      </div>
+    <% end %>
   </div>
 
   <h3 class="tc black-50 mv5">
