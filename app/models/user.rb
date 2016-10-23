@@ -30,6 +30,15 @@ class User < ApplicationRecord
     }
   end
 
+  def gravatar_url(size = 200)
+    hash = Digest::MD5.hexdigest(email)
+    query_parameters = {
+      d: 'retro',
+      s: size,
+    }
+    "https://secure.gravatar.com/avatar/#{hash}?#{query_parameters.to_param}"
+  end
+
 private
 
   def set_defaults

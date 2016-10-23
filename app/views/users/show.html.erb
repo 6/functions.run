@@ -3,7 +3,21 @@
   description("#{@user.username} has #{@functions.size} functions on Functions.run.")
 %>
 
-<h1><%= @user.username %></h1>
-<main class="mw6 center">
-  <%= render partial: "functions/list", locals: {functions: @functions} %>
+<main class="mw7 center cf">
+  <div class="w-30 fl pr4 pt3">
+    <% if @is_self %>
+      <a href="https://gravatar.com">
+        <img src="<%= @user.gravatar_url(400).html_safe %>" class="user-avatar">
+      </a>
+    <% else %>
+      <img src="<%= @user.gravatar_url(400).html_safe %>" class="user-avatar">
+    <% end %>
+    <h1 class="mv2 truncate"><%= @user.username %></h1>
+    <p class="lh-copy f6 black-40">
+      <%= @user.username %> joined on <%= @user.created_at.strftime("%b %-d, %Y") %> and has <%= @functions.size %> functions.
+    </p>
+  </div>
+  <div class="w-70 fl mt3 bt b--black-05">
+    <%= render partial: "functions/list", locals: {functions: @functions} %>
+  </div>
 </main>

@@ -8,8 +8,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_username_case_insensitive!(params[:username])
     if @user.id == current_user&.id
+      @is_self = true
       @functions = @user.functions
     else
+      @is_self = false
       @functions = @user.functions.where(private: false)
     end
     @functions = @functions.order(updated_at: :desc)
