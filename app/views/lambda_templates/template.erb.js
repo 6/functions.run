@@ -1,7 +1,7 @@
 exports.handler = function(event, context, callback) {
-  return userCode(event, callback);
+  return runCode(event, callback);
 };
 
-var userCode = function(event, callback) {
+var runCode = function(input, callback) {
   <%= code %>
 };

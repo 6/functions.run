@@ -1,5 +1,5 @@
 def handler(event, context):
-    return user_code(event)
+    return runCode(event)
 
-def user_code(event):
+def runCode(input):
     <%= code %>

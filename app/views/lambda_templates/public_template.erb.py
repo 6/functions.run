@@ -1,2 +1,2 @@
-def <%= name %>(event, callback):
+def <%= name %>(input, callback):
   <%= code %>

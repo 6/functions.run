@@ -1,3 +1,3 @@
-function <%= name %>(event, callback) {
+function <%= name %>(input, callback) {
   <%= code %>
 }
