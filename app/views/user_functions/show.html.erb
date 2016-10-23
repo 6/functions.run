@@ -37,7 +37,7 @@
           Use function
         </a>
         <% if current_user&.id == @function.user_id %>
-          <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-black-50" href="<%= edit_function_path(@function) %>">Settings</a>
+          <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-black-50 no-underline" href="<%= edit_function_path(@function) %>">Settings</a>
         <% end %>
       </div>
     </section>
@@ -77,8 +77,26 @@
           </p>
         </div>
       </div>
+
       <div ng-show="activeView === 'use'">
         <p class="black-50 mt0 lh-copy f6">Here's how to to use this function in your own app.</p>
+        <h3>Step 1. Get your API key</h3>
+        <% if current_user %>
+          <p class="black-50 mt0 lh-copy f6">Copy and paste the following key:</p>
+          <p><input type="text" class="input-reset b--black-20 black f6 w-100" value="<%= current_user&.api_key %>"></p>
+        <% else %>
+          <p class="light-red mt0 lh-copy">You are not logged in. You must be logged in and have an API key to continue.</p>
+        <% end %>
+
+        <h3>Step 2. Invoke the function</h3>
+        <p class="black-50 mt0 lh-copy f6">Make a <b>POST</b> request to the following endpoint and specify your API key in the <b>X-Api-Key</b> header. Also specify a <b>payload</b> in your JSON request body.</p>
+        <p><input type="text" class="input-reset b--black-20 black f6 w-100" value="<%= api_function_invocations_url(@function) %>"></p>
+
+        <h3>Example: cURL</h3>
+        <textarea class=" pa2 input-reset code-input hover-bg-white b--black-20 black w-100" rows="3">curl -H "Content-Type: application/json" \
+     -H "X-Api-Key: <%= current_user&.api_key || 'your-api-key' %>" \
+     -X POST -d '{"payload": "{}"}' \
+     <%= api_function_invocations_url(@function) %></textarea>
       </div>
     </div>
   </main>

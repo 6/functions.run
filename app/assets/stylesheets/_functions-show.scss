@@ -2,7 +2,8 @@
   font-family: Consolas, Menlo, Courier, monospace;
   font-size: 13px;
   resize: none;
-  min-width: 760px;
+  white-space: nowrap;
+  overflow: scroll;
 }
 
 .code-editor-container {
