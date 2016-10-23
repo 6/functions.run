@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options host: Rails.application.secrets.default_host, protocol: Rails.application.secrets.default_protocol
+
   namespace :api do
     resources :functions, only: [:show, :create, :update, :destroy] do
       resources :invocations, only: [:create]
