@@ -23,6 +23,13 @@ class User < ApplicationRecord
     self.api_key = "api-key_#{SecureRandom.urlsafe_base64(30)}"
   end
 
+  def as_json(options = {})
+    {
+      id: id,
+      username: username,
+    }
+  end
+
 private
 
   def set_defaults

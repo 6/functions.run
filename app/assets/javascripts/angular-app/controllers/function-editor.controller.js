@@ -9,9 +9,10 @@
     '$scope',
     '$timeout',
     'functions-app.functions-service',
+    'functions-app.users-service',
   ];
 
-  function Controller($scope, $timeout, functionsService) {
+  function Controller($scope, $timeout, functionsService, usersService) {
     var editor;
     $scope.function = null;
     functionsService.getFunction(null, true).$promise.then(function(fn) {
@@ -39,6 +40,11 @@
 
       editor.setOption('mode', {name: $scope.function.runtime_language, version: $scope.function.runtime_version});
       editor.getDoc().markClean();
+
+      if (!usersService.canCurrentUserEditFunction($scope.function)) {
+        editor.setOption('readOnly', 'nocursor');
+        return;
+      }
 
       $timeout(function() {
         var doc = editor.getDoc();

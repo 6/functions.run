@@ -9,6 +9,16 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+    <script>
+      window.data = {};
+      <% if current_user.present? %>
+        window.data.currentUser = <%= current_user.as_json.to_json.html_safe %>;
+      <% end %>
+      <% if @function.present? %>
+        window.data.function = <%= @function.as_json.to_json.html_safe %>;
+      <% end %>
+    </script>
   </head>
 
   <body>
