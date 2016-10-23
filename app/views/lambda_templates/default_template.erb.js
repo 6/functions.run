@@ -1,3 +1,3 @@
-  var name = input.name || 'Peter';
+  var name = input.name || 'YourName';
   var response = {message: 'Hello ' + name};
   callback(null, response);

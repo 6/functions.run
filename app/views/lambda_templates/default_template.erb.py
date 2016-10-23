@@ -1,3 +1,3 @@
-    name = input['name'] or 'Peter'
+    name = input.get('name') or 'YourName'
     response = {'message': 'Hello ' + name}
     return response
