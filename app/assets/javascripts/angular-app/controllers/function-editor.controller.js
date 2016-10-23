@@ -46,6 +46,7 @@
 
       editor.commands.on("exec", function(e) {
         var rowCol = editor.selection.getCursor();
+        console.log(rowCol.row, rowCol.column, e.command.name);
 
         function preventTyping() {
           e.preventDefault();
@@ -59,7 +60,12 @@
         if ((rowCol.row + 1) == editor.session.getLength() && $scope.function.disable_final_line_editing) {
           preventTyping();
         }
+
+        if (rowCol.row === 1 && rowCol.column === 0 && $scope.disable_first_line_editing && e.command.name === "backspace") {
+          preventTyping();
+        }
       });
+
 
       // Ace adds vertical scrolling unless you do this.
       $timeout(function() {
