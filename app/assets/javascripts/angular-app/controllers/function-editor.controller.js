@@ -26,6 +26,7 @@
       editor.setOption('theme', 'github');
       editor.setOption('lineWrapping', true);
       editor.setOption('lineNumbers', true);
+      editor.setOption('readOnly', true);
       editor.focus();
 
       setLanguageSpecificEditorConfig();
@@ -41,6 +42,7 @@
 
       $timeout(function() {
         var doc = editor.getDoc();
+        editor.setOption('readOnly', false);
         if ($scope.function.disable_final_line_editing) {
           doc.markText(
             {line: 0, ch: 0},
