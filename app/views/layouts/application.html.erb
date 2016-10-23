@@ -30,12 +30,12 @@
           </a>
         </div>
         <div class="dtc v-mid tr pa3">
-          <a class="f6 fw4 hover-white no-underline lightest-blue dn dib-l pv2 ph3" href="<%= functions_path %>">Explore Functions</a>
+          <a class="f6 fw4 hover-white no-underline lightest-blue dib pv2 ph3" href="<%= functions_path %>">Explore Functions</a>
 
           <% if current_user %>
             <a class="f6 fw4 hover-white no-underline lightest-blue dib ml2 pv2 ph3 ba" href="<%= new_function_path %>">Create Function</a>
             <a class="f6 fw4 hover-white no-underline lightest-blue dib ml2 pv2 ph3 ba" href="<%= user_path(current_user.username) %>">Profile</a>
-            <a class="f6 fw4 hover-white no-underline lightest-blue dn dib-l pv2 ph3" href="<%= destroy_session_path %>">Logout</a>
+            <a class="f6 fw4 hover-white no-underline lightest-blue dib pv2 ph3" href="<%= destroy_session_path %>">Logout</a>
           <% else %>
             <a class="f6 fw4 hover-white no-underline lightest-blue dib ml2 pv2 ph3 ba" href="<%= new_session_path %>" >Log In</a>
             <a class="f6 fw4 hover-white no-underline lightest-blue dib ml2 pv2 ph3 ba" href="<%= new_user_path %>" >Sign Up</a>
