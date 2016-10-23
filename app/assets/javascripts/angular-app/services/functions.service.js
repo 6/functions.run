@@ -13,10 +13,17 @@
   function Service($resource, $q) {
     var service = {};
     service.getFunction = getFunction;
+    service.invokeFunction = invokeFunction;
 
     function functionsResource() {
       return $resource('/api/functions/:id', null, {
-        'get': { method: 'GET', isArray: false }
+        'get': { method: 'GET', isArray: false },
+      });
+    }
+
+    function functionInvocationsResource() {
+      return $resource('/api/functions/:id/invocations', null, {
+        save: { method: "POST" },
       });
     }
 
@@ -28,6 +35,10 @@
       } else {
         return functionsResource().get({id: id});
       }
+    }
+
+    function invokeFunction(id) {
+      return functionInvocationsResource().save({id: id}, {});
     }
 
     return service;
