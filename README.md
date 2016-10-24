@@ -1,4 +1,4 @@
-# README [![CircleCI](https://circleci.com/gh/rumblex/rubyrampage2016-gee.svg?style=svg&circle-token=86530641585b35ef221f2cb0eeaf8f4acba350be)](https://circleci.com/gh/rumblex/rubyrampage2016-gee)
+# README [![CircleCI](https://circleci.com/gh/6/functions.run.svg?style=svg&circle-token=3ae480764201d0f3a6898e1a07367bb94a7363c1)](https://circleci.com/gh/6/functions.run)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
