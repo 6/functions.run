@@ -18,8 +18,10 @@
         </a>
         <div class="black-30 f6 fw4 fr">
           <% if current_user %>
-            <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-pink" ng-click="updateFunction()" ng-disabled="updatingFunction">
-              {{ updatingFunction ? 'Saving' : 'Save code' }}
+            <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-pink" ng-click="updateFunction()" ng-disabled="state.updatingFunction">
+              <span class="pr2">{{ state.updatingFunction ? 'Saving' : 'Save code' }}</span>
+              <i class="fa fa-floppy-o" aria-hidden="true" ng-show="!state.updatingFunction"></i>
+              <i class="fa fa-spinner" aria-hidden="true" ng-show="state.updatingFunction"></i>
             </a>
           <% end %>
           <%= @function.runtime_name %>
@@ -72,7 +74,7 @@
           <i class="fa fa-spinner" aria-hidden="true" ng-show="state.invoking"></i>
         </button>
 
-        <div ng-if="invocation">
+        <div ng-if="invocation && !state.invoking">
           <p ng-if="invocation.error === 'Handled'" class="light-red f6">Your request returned an error.</p>
           <p ng-if="invocation.error === 'Unhandled'" class="light-red f6">There was a unhandled error. View logs for details.</p>
           <p ng-if="!invocation.error" class="green f6">Your request completed successfully.</p>

@@ -16,6 +16,9 @@
     var editor;
     $scope.activeView = 'run';
     $scope.function = null;
+    $scope.state = {
+      updatingFunction: false,
+    };
     functionsService.getFunction(null, true).$promise.then(function(fn) {
       $scope.function = fn;
       setLanguageSpecificEditorConfig();
@@ -35,7 +38,7 @@
     }
 
     $scope.updateFunction = function() {
-      $scope.updatingFunction = true;
+      $scope.state.updatingFunction = true;
       var codeLines = editor.getValue().split("\n");
       if ($scope.function.disable_first_line_editing) {
         codeLines.shift();
@@ -45,9 +48,9 @@
       }
       var code = $.trim(codeLines.join("\n"));
       functionsService.updateFunction($scope.function.id, {code: code}).$promise.then(function() {
-        $scope.updatingFunction = false;
+        $scope.state.updatingFunction = false;
       }, function() {
-        $scope.updatingFunction = false;
+        $scope.state.updatingFunction = false;
       });
     }
 
