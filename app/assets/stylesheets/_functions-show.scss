@@ -1,9 +1,18 @@
-.code-input, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea.code-input {
+@mixin code-input {
   font-family: Consolas, Menlo, Courier, monospace;
   font-size: 13px;
   resize: none;
-  white-space: nowrap;
   overflow: scroll;
+}
+
+.code-input {
+  @include code-input;
+  white-space: nowrap;
+}
+
+.vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea.code-input {
+  @include code-input;
+  white-space: normal;
 }
 
 .code-editor-container {

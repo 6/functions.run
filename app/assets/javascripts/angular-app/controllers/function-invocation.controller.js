@@ -61,7 +61,6 @@
 
     $scope.expandLogs = function() {
       var vexInstance = vex.dialog.open({
-        message: 'Logs',
         input: [
           '<textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="15" spellcheck="false">',
               $scope.invocation.log,
