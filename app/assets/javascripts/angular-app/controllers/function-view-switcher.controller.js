@@ -7,10 +7,16 @@
 
   Controller.$inject = [
     '$scope',
+    'functions-app.functions-service',
   ];
 
-  function Controller($scope) {
-    $scope.activeView = 'run';
+  function Controller($scope, functionsService) {
+    // $scope.activeView = 'run';
+    //
+    // $scope.function = null;
+    // functionsService.getFunction(null, true).$promise.then(function(fn) {
+    //   $scope.function = fn;
+    // });
   }
 
 })();

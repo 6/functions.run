@@ -2,7 +2,7 @@
   title("Functions.run - #{@function.user.username}/#{@function.name}")
   description([@function.name, @function.description.presence].compact.join(" - "))
 %>
-<div ng-controller="functions-app.function-view-switcher-controller" ng-cloak>
+<div ng-controller="functions-app.function-editor-controller" ng-cloak>
   <div class="bb b--black-20 cf function-header-bar">
     <section class="fl w-60 ph4 br b--black-20 h-100">
       <h1 class="f4 mb1">
@@ -16,7 +16,14 @@
         <a href="<%= user_function_path(@function.user.username, @function.name) %>" class="no-underline blue dim">
           <%= @function.name %>
         </a>
-        <div class="black-30 f6 fw4 fr"><%= @function.runtime_name %></div>
+        <div class="black-30 f6 fw4 fr">
+          <% if current_user %>
+            <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-pink" ng-click="updateFunction()" ng-disabled="updatingFunction">
+              {{ updatingFunction ? 'Saving' : 'Save code' }}
+            </a>
+          <% end %>
+          <%= @function.runtime_name %>
+        </div>
       </h1>
       <h2 class="f6 fw4 mt0 mb3">
         <% if @function.description.present? %>
@@ -44,7 +51,7 @@
   </div>
 
   <main class="w-100 center cf js-stretch-to-bottom">
-    <div class="fl w-60 h-100 br b--black-10 code-editor-container" ng-controller="functions-app.function-editor-controller">
+    <div class="fl w-60 h-100 br b--black-10 code-editor-container">
       <div
         ui-codemirror="{onLoad : codemirrorLoaded}"
         ng-model="function.code_with_template" class="h-100"></div>

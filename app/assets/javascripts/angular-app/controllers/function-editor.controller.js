@@ -14,6 +14,7 @@
 
   function Controller($scope, $timeout, functionsService, usersService) {
     var editor;
+    $scope.activeView = 'run';
     $scope.function = null;
     functionsService.getFunction(null, true).$promise.then(function(fn) {
       $scope.function = fn;
@@ -31,6 +32,23 @@
       editor.focus();
 
       setLanguageSpecificEditorConfig();
+    }
+
+    $scope.updateFunction = function() {
+      $scope.updatingFunction = true;
+      var codeLines = editor.getValue().split("\n");
+      if ($scope.function.disable_first_line_editing) {
+        codeLines.shift();
+      }
+      if ($scope.function.disable_final_line_editing) {
+        codeLines.pop();
+      }
+      var code = $.trim(codeLines.join("\n"));
+      functionsService.updateFunction($scope.function.id, {code: code}).$promise.then(function() {
+        $scope.updatingFunction = false;
+      }, function() {
+        $scope.updatingFunction = false;
+      });
     }
 
     function setLanguageSpecificEditorConfig() {
