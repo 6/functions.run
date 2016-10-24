@@ -150,6 +150,11 @@ class Function < ApplicationRecord
     })
   end
 
+  def first_n_lines_of_code(n, template: false)
+    code_string = template ? code_with_template(use_public_template: true) : code
+    code_string.split("\n").first(n).join("\n")
+  end
+
 private
 
   def code_as_zip_file

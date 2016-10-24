@@ -12,6 +12,9 @@
 //= require angular-resource
 //= require angular-ui-codemirror/ui-codemirror
 //= require vex/dist/js/vex.combined.js
+//= require prism/prism
+//= require prism/components/prism-javascript
+//= require prism/components/prism-python
 
 //= require stretch-to-bottom
 //= require angular-app/index

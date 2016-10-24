@@ -3,8 +3,8 @@
   description("#{@user.username} has #{@functions.size} functions on Functions.run.")
 %>
 
-<main class="mw7 center cf">
-  <div class="w-30 fl pr4 pt3">
+<main class="mw8 center cf">
+  <div class="w-20 fl pr4 pt3">
     <% if @is_self %>
       <a href="https://gravatar.com">
         <img src="<%= @user.gravatar_url(400).html_safe %>" class="user-avatar">
@@ -17,7 +17,7 @@
       <%= @user.username %> joined on <%= @user.created_at.strftime("%b %-d, %Y") %> and has <%= pluralize(@functions.size, "function") %>.
     </p>
   </div>
-  <div class="w-70 fl mt3">
+  <div class="w-80 fl mt3">
     <% if @functions.size == 0 %>
       <div class="ba b--black-10 bg-black-05 tc pa4 br2">
         <% if @is_self %>
