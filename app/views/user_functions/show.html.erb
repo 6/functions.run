@@ -73,9 +73,10 @@
         </button>
 
         <div ng-if="invocation">
-          <p ng-if="invocation.error" class="light-red f6">There was an error of type <b>{{invocation.error}}</b>.</p>
+          <p ng-if="invocation.error === 'Handled'" class="light-red f6">Your request returned an error.</p>
+          <p ng-if="invocation.error === 'Unhandled'" class="light-red f6">There was a unhandled error. View logs for details.</p>
           <p ng-if="!invocation.error" class="green f6">Your request completed successfully.</p>
-          <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error" spellcheck="false">{{invocation.payload}}</textarea>
+          <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error || invocation.error === 'Handled'" spellcheck="false">{{invocation.payload}}</textarea>
           <p ng-if="invocation.log" class="f6">
             <a class="blue" ng-click="expandLogs()">
               View logs
