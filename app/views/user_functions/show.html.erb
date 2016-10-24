@@ -78,7 +78,7 @@
           <p ng-if="invocation.error === 'Handled'" class="light-red f6">Your request returned an error.</p>
           <p ng-if="invocation.error === 'Unhandled'" class="light-red f6">There was a unhandled error. View logs for details.</p>
           <p ng-if="!invocation.error" class="green f6">Your request completed successfully.</p>
-          <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error || invocation.error === 'Handled'" spellcheck="false">{{invocation.payload}}</textarea>
+          <textarea class="code-input pa2 input-reset hover-bg-white b--black-20 black w-100" rows="4" ng-if="!invocation.error || invocation.error === 'Handled' || invocation.payload.errorMessage" spellcheck="false">{{invocation.payload.errorMessage || invocation.payload}}</textarea>
           <p ng-if="invocation.log" class="f6">
             <a class="f6 grow br2 ph3 pv2 mr2 dib white bg-pink" ng-click="expandLogs()">
               View logs

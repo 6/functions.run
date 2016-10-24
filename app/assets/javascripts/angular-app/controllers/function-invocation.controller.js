@@ -48,6 +48,7 @@
       functionsService.invokeFunction($scope.function.id, $scope.invocationRequest.payload).$promise.then(function(invocation) {
         try {
           invocation.log = $.trim(atob(invocation.log_result));
+          invocation.payload = JSON.parse(invocation.payload);
         } catch (e) {
           invocation.log = null;
         }
